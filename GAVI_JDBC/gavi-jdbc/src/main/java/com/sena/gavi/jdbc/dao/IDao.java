@@ -14,7 +14,7 @@ import java.util.List;
 public interface IDao <T, K>{
     void insertar(T a)throws DaoExceptions;
     void modificar (T a);
-    T obtener(K id);
-    List<T> obtenerTodos();
+    T obtener(K id) throws DaoExceptions;
+    List<T> obtenerTodos() throws DaoExceptions;
     void eliminar(T a);
 }

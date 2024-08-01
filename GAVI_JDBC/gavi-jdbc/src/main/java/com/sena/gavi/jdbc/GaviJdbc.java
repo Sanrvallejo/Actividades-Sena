@@ -9,6 +9,8 @@ import com.sena.gavi.jdbc.entities.Productos;
 import com.sena.gavi.jdbc.exceptions.DaoExceptions;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,12 +28,12 @@ public class GaviJdbc {
         }
         
         IProductosDao productoDao = new ProductosImpl(conexion);
-        Productos producto = new Productos("PRD050", "Arroz Roa", 2900, 36.2, 1);
+        List<Productos> productos = new ArrayList<>();
         try {
-            productoDao.insertar(producto);
+            productos = productoDao.obtenerTodos();
+            System.out.println(productos);
         } catch (DaoExceptions ex) {
             throw new DaoExceptions("Error en SQL");
         }
-
     }
 }

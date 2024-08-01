@@ -8,7 +8,9 @@ import com.sena.gavi.jdbc.entities.Productos;
 import com.sena.gavi.jdbc.exceptions.DaoExceptions;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,19 +19,21 @@ import java.util.logging.Logger;
  *
  * @author Usuario
  */
-public class ProductosImpl implements IProductosDao{
-    
+public class ProductosImpl implements IProductosDao {
+
     private Connection conn;
-    
+
     String INSERT = "INSERT INTO productos(codigo, nombre, precio, existencias, user_id) VALUES(?,?,?,?,?)";
-    
+    String GETALL = "SELECT id_producto, codigo, nombre, precio, existencias, user_id FROM productos";
+    String GETONE = "SELECT id_producto, codigo, nombre, precio, existencias, user_id FROM productos WHERE id_producto = ?";
+
     //Constructor de clase que reciba una conexión para manipular la DB
-    public ProductosImpl(Connection conn){
+    public ProductosImpl(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public void insertar(Productos p) throws DaoExceptions{
+    public void insertar(Productos p) throws DaoExceptions {
         PreparedStatement stat = null; //No se usa Statement para evitar SQLInjection
         try {
             stat = conn.prepareStatement(INSERT);
@@ -43,7 +47,7 @@ public class ProductosImpl implements IProductosDao{
             };
         } catch (SQLException e) {
             throw new DaoExceptions("Error en SQL", e);
-        }finally {
+        } finally {
             if (stat != null) {
                 try {
                     stat.close();
@@ -52,7 +56,79 @@ public class ProductosImpl implements IProductosDao{
                 }
             }
         }
-        
+
+    }
+
+    private Productos convertir(ResultSet rs) throws SQLException {
+        String codigo = rs.getString("codigo");
+        String nombre = rs.getString("nombre");
+        double precio = rs.getDouble("precio");
+        double existencias = rs.getDouble("existencias");
+        Integer user = rs.getInt("user_id");
+        Productos producto = new Productos(codigo, nombre, precio, existencias, user);
+        producto.setId(rs.getInt("id_producto"));
+        return producto;
+    }
+
+    @Override
+    public Productos obtener(Integer id) throws DaoExceptions {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        Productos p = null;
+        try {
+            stat = conn.prepareStatement(GETONE);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                p = convertir(rs);
+            } else {
+                throw new DaoExceptions("Id no encontrado");
+            }
+        } catch (Exception e) {
+            throw new DaoExceptions("Error en SQL", e);
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException ex) {
+                new DaoExceptions("Error en SQL", ex);
+            }
+            if (stat != null) try {
+                stat.close();
+            } catch (SQLException ex) {
+                new DaoExceptions("Error en SQL", ex);
+            }
+        }
+
+        return p;
+    }
+
+    @Override
+    public List<Productos> obtenerTodos() throws DaoExceptions {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<Productos> productos = new ArrayList<>();
+        try {
+            stat = conn.prepareStatement(GETALL);
+            rs = stat.executeQuery();
+            while (rs.next()) {                
+                productos.add(convertir(rs));
+            }
+        } catch (Exception e) {
+            throw new DaoExceptions("Error en SQL", e);
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException ex) {
+                new DaoExceptions("Error en SQL", ex);
+            }
+            if (stat != null) try {
+                stat.close();
+            } catch (SQLException ex) {
+                new DaoExceptions("Error en SQL", ex);
+            }
+        }
+
+        return productos;
     }
 
     @Override
@@ -61,18 +137,8 @@ public class ProductosImpl implements IProductosDao{
     }
 
     @Override
-    public Productos obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Productos> obtenerTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void eliminar(Productos a) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
