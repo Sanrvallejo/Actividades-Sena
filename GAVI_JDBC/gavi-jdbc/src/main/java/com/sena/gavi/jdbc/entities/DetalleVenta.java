@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Data
 public class DetalleVenta {
-    private int id;
+    private Integer id;
     private int venta;
     private int producto;
     private Date fecha;

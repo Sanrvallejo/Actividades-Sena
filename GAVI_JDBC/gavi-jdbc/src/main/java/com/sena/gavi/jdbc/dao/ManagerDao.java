@@ -15,6 +15,7 @@ import lombok.Data;
  */
 @Data
 public class ManagerDao {
+    
     private Connection conn;
     
     public ManagerDao(String host, String username, String password, String db) throws SQLException{

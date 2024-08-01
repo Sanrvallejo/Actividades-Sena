@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Data
 public class Ventas {
-    private int id;
+    private Integer id;
     private Date fecha;
     private double total;
     private double totalIva;
