@@ -27,7 +27,8 @@ public class ProductosImpl implements IProductosDao {
     String GETALL = "SELECT id_producto, codigo, nombre, precio, existencias, user_id FROM productos";
     String GETONE = "SELECT id_producto, codigo, nombre, precio, existencias, user_id FROM productos WHERE id_producto = ?";
     String UPDATE = "UPDATE productos SET codigo = ?, nombre = ?, precio = ?, existencias = ?, user_id = ? WHERE id_producto = ?";
-
+    String DELETE = "DELETE FROM productos WHERE id_producto = ?";
+    
     //Constructor de clase que reciba una conexión para manipular la DB
     public ProductosImpl(Connection conn) {
         this.conn = conn;
@@ -132,7 +133,7 @@ public class ProductosImpl implements IProductosDao {
     }
 
     @Override
-    public void modificar(Productos p, int id) throws DaoExceptions{
+    public void modificar(Productos p, Integer id) throws DaoExceptions{
         PreparedStatement stat = null;
         try {
             stat = conn.prepareStatement(UPDATE);
@@ -159,8 +160,27 @@ public class ProductosImpl implements IProductosDao {
     }
 
     @Override
-    public void eliminar(Productos a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eliminar(Integer id) throws DaoExceptions{
+        PreparedStatement stat = null;
+        Productos p = null;
+        try {
+            p = obtener(id);
+            stat = conn.prepareStatement(DELETE);
+            stat.setInt(1, p.getId());
+            if (stat.executeUpdate() == 0) {
+                throw new DaoExceptions("No se eliminó nada");
+            }
+        } catch (SQLException e) {
+            throw new DaoExceptions("Error en SQL", e);
+        }finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException e) {
+                    throw new DaoExceptions("Error en SQL", e);
+                }
+            }
+        }
     }
 
 }

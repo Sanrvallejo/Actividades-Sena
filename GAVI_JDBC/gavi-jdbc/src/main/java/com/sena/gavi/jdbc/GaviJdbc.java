@@ -28,9 +28,9 @@ public class GaviJdbc {
         }
         
         IProductosDao productoDao = new ProductosImpl(conexion);
-        Productos producto = new Productos("PRD051", "Arroz Roa", 2550, 50, 1);
+        //Productos producto = new Productos("PRD051", "Arroz Roa", 2550, 50, 1);
         try {
-            productoDao.modificar(producto, 2);
+            productoDao.eliminar(2);
         } catch (DaoExceptions ex) {
             throw new DaoExceptions("Error en SQL");
         }
