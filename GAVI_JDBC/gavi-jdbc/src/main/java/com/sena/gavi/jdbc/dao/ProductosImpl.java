@@ -26,6 +26,7 @@ public class ProductosImpl implements IProductosDao {
     String INSERT = "INSERT INTO productos(codigo, nombre, precio, existencias, user_id) VALUES(?,?,?,?,?)";
     String GETALL = "SELECT id_producto, codigo, nombre, precio, existencias, user_id FROM productos";
     String GETONE = "SELECT id_producto, codigo, nombre, precio, existencias, user_id FROM productos WHERE id_producto = ?";
+    String UPDATE = "UPDATE productos SET codigo = ?, nombre = ?, precio = ?, existencias = ?, user_id = ? WHERE id_producto = ?";
 
     //Constructor de clase que reciba una conexión para manipular la DB
     public ProductosImpl(Connection conn) {
@@ -56,7 +57,6 @@ public class ProductosImpl implements IProductosDao {
                 }
             }
         }
-
     }
 
     private Productos convertir(ResultSet rs) throws SQLException {
@@ -132,8 +132,30 @@ public class ProductosImpl implements IProductosDao {
     }
 
     @Override
-    public void modificar(Productos a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void modificar(Productos p, int id) throws DaoExceptions{
+        PreparedStatement stat = null;
+        try {
+            stat = conn.prepareStatement(UPDATE);
+            stat.setString(1, p.getCodigo());
+            stat.setString(2, p.getNombre());
+            stat.setDouble(3, p.getPrecio());
+            stat.setDouble(4, p.getExistencias());
+            stat.setInt(5, p.getUser());
+            stat.setInt(6, id);
+            if (stat.executeUpdate() == 0) {
+                throw new DaoExceptions("La base de datos no guardó");
+            };
+        } catch (SQLException e) {
+            throw new DaoExceptions("Error en SQL", e);
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    throw new DaoExceptions("Error en SQL, ex");
+                }
+            }
+        }
     }
 
     @Override
