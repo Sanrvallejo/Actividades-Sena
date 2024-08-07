@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 package com.sena.gavi.jdbc;
 
-import com.sena.gavi.jdbc.dao.DetalleVentaImpl;
-import com.sena.gavi.jdbc.dao.IDetalleVentaDao;
 import com.sena.gavi.jdbc.dao.IProductosDao;
-import com.sena.gavi.jdbc.dao.IVentasDao;
 import com.sena.gavi.jdbc.dao.ProductosImpl;
 import com.sena.gavi.jdbc.dao.VentasImpl;
-import com.sena.gavi.jdbc.entities.DetalleVenta;
 import com.sena.gavi.jdbc.entities.Productos;
 import com.sena.gavi.jdbc.entities.Ventas;
 import com.sena.gavi.jdbc.exceptions.DaoExceptions;
@@ -20,10 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author Usuario
- */
 public class GaviJdbc {
 
     public static void main(String[] args) throws DaoExceptions, SQLException {
