@@ -5,6 +5,7 @@
 package com.sena.gavi.jdbc.entities;
 
 import java.util.Date;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -18,4 +19,16 @@ public class Ventas {
     private double total;
     private double totalIva;
     private int user;
+    
+    /*public Ventas(List<Productos> productos, int user) {
+        fecha = new Date();
+        this.user = user;
+    }*/
+    
+    public Ventas(double total, double totalIva, int user) {
+        fecha = new Date();
+        this.total = total;
+        this.totalIva = totalIva;
+        this.user = user;
+    }
 }

@@ -49,7 +49,7 @@ public class ProductosImpl implements IProductosDao {
             };
         } catch (SQLException e) {
             throw new DaoExceptions("Error en SQL", e);
-        } finally {
+        } finally { //Este finally se hace con el fin de cerrar la conexión a la base de datos en caso de error y que no quede en el trash.
             if (stat != null) {
                 try {
                     stat.close();
@@ -59,7 +59,8 @@ public class ProductosImpl implements IProductosDao {
             }
         }
     }
-
+    
+    //Método para tratar un objeto Producto y evitar la incompatibilidad del objeto origen ResultSet con la clase Producto
     private Productos convertir(ResultSet rs) throws SQLException {
         String codigo = rs.getString("codigo");
         String nombre = rs.getString("nombre");
@@ -71,6 +72,7 @@ public class ProductosImpl implements IProductosDao {
         return producto;
     }
 
+    //Método para obtener un registo mediante el ID.
     @Override
     public Productos obtener(Integer id) throws DaoExceptions {
         PreparedStatement stat = null;
@@ -103,6 +105,7 @@ public class ProductosImpl implements IProductosDao {
         return p;
     }
 
+    //Método para obtener todos los registros de la tabla productos
     @Override
     public List<Productos> obtenerTodos() throws DaoExceptions {
         PreparedStatement stat = null;

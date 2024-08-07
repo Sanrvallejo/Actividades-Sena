@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sena.gavi.jdbc.entities;
 
 import java.sql.Time;
 import java.util.Date;
 import lombok.Data;
 
-/**
- *
- * @author Usuario
- */
 @Data
 public class DetalleVenta {
     private Integer id;
@@ -19,5 +11,14 @@ public class DetalleVenta {
     private int producto;
     private Date fecha;
     private double cantidad;
-    private double subtotal;
+
+    public DetalleVenta() {
+    }
+    
+    public DetalleVenta(int venta, int producto, Date fecha, double cantidad) {
+        this.venta = venta;
+        this.producto = producto;
+        this.fecha = fecha;
+        this.cantidad = cantidad;
+    }
 }
