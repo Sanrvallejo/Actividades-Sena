@@ -24,13 +24,7 @@ public class VentasImpl implements IVentasDao{
     String INSERT = "INSERT INTO ventas(fecha, total, total_iva, user_id) VALUES (?, ?, ?, ?)";
     String GETONE = "SELECT id_venta, fecha, total, total_iva, user_id FROM ventas WHERE id_venta = ?";
     String UPDATE = "UPDATE ventas SET total = ?, total_iva = ? WHERE id_venta = ?";
-    
-    /*
-        TODO: Método convertir venta desde el ResultSet
-        Método obtener venta por ID
-        Lista de productos 
-        Llamada al DetalleVentaImpl
-    */
+
     public void crearVenta(List<Productos> productos, double[] cantidad, Ventas v, Date fecha) throws DaoExceptions{
         DetalleVentaImpl detalleDao = new DetalleVentaImpl(conn);
         IProductosDao productoDao = new ProductosImpl(conn);
