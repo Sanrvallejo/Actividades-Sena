@@ -2,7 +2,6 @@ package com.sena.gavi.jdbc.dao;
 
 import com.sena.gavi.jdbc.entities.DetalleVenta;
 import com.sena.gavi.jdbc.entities.Productos;
-import com.sena.gavi.jdbc.entities.Ventas;
 import com.sena.gavi.jdbc.exceptions.DaoExceptions;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DetalleVentaImpl implements IDetalleVentaDao {
 
@@ -21,9 +18,9 @@ public class DetalleVentaImpl implements IDetalleVentaDao {
         this.conn = conn;
     }
 
-    String INSERT = "INSERT INTO detalle_venta(venta, producto, cantidad, fecha) VALUES (?, ?, ?, ?)";
+    String INSERT = "INSERT INTO detalle_venta(venta, producto, cantidad, fecha) VALUES(?, ?, ?, ?)";
 
-    public void crearDetalleVenta(List<Productos> productos, int cantidad[], int id_venta, Date fecha) throws DaoExceptions {
+    public double crearDetalleVenta(List<Productos> productos, double[] cantidad, int id_venta, Date fecha) throws DaoExceptions {
         DetalleVenta d = new DetalleVenta();
         double subtotal = 0;
         d.setVenta(id_venta);
@@ -32,9 +29,12 @@ public class DetalleVentaImpl implements IDetalleVentaDao {
         for (Productos p : productos) {
             d.setProducto(p.getId());
             d.setCantidad(cantidad[i]);
-            i++;
+            subtotal += p.getPrecio()*cantidad[i];
             insertar(d);
+            i++;
         }
+        
+        return subtotal;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class DetalleVentaImpl implements IDetalleVentaDao {
             }
         } catch (SQLException ex) {
             throw new DaoExceptions("Error en SQL", ex);
-        }finally {
+        } finally {
             if (stat != null) {
                 try {
                     stat.close();
@@ -60,7 +60,7 @@ public class DetalleVentaImpl implements IDetalleVentaDao {
                 }
             }
         }
-        
+
     }
 
     @Override
