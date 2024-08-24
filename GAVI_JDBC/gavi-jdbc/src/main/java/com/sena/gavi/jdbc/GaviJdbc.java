@@ -25,14 +25,34 @@ public class GaviJdbc {
         }
 
         //Método para crear productos
-        /*IProductosDao productoDao = new ProductosImpl(conexion);
-        //Productos producto = new Productos("PRD051", "Arroz Roa", 2550, 50, 1);
-        try {
-            productoDao.eliminar(2);
+        IProductosDao productoDao = new ProductosImpl(conexion);
+        Productos producto = new Productos("PRD099", "Pasta Nuria", 1990, 20, 1);
+        /*try {
+            productoDao.insertar(producto);
         } catch (DaoExceptions ex) {
             throw new DaoExceptions("Error en SQL");
         }*/
-        //Método para crear cventas completas.
+        
+        /*//Metodo para obtener un producto
+        try {
+            System.out.println(productoDao.obtener(3));
+        } catch (DaoExceptions ex) {
+            throw new DaoExceptions("Error en SQL");
+        }*/
+        
+        //Metodo para obtener todos los productos
+        try {
+            List<Productos> p = new ArrayList<>();
+            p = productoDao.obtenerTodos();
+            for (Productos product : p) {
+                System.out.println(product);
+            }
+        } catch (DaoExceptions ex) {
+            throw new DaoExceptions("Error en SQL");
+        }
+        
+        
+        /*Método para crear cventas completas.
         try {
             conexion.setAutoCommit(false);
         } catch (SQLException ex) {
@@ -55,6 +75,6 @@ public class GaviJdbc {
         cantidad[2] = 3.3;
 
         //Crear venta
-        ventasDao.crearVenta(productos, cantidad, new Ventas(0, 0, 1), new Date());
+        ventasDao.crearVenta(productos, cantidad, new Ventas(0, 0, 1), new Date());*/
     }
 }

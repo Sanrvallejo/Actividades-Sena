@@ -27,4 +27,6 @@ public class Productos {
         this.existencias = existencias;
         this.user = user;
     }
+    
+    
 }
