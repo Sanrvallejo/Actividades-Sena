@@ -2,6 +2,7 @@ package com.sena.crud.jsp.logica;
 
 //entidad ventas en bd
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Ventas {
+public class Ventas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

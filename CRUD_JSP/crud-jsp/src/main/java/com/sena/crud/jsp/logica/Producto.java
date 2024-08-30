@@ -2,6 +2,7 @@ package com.sena.crud.jsp.logica;
 
 //entidad producto para guarda en l bd
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Producto {
+public class Producto implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY) //generacion secuencial con los otros id

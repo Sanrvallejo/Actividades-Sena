@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -30,6 +31,10 @@ public class ProductoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+    public ProductoJpaController() {
+        emf = Persistence.createEntityManagerFactory("CrudJsp_PU");
+    }
+    
     public void create(Producto producto) {
         EntityManager em = null;
         try {
