@@ -35,8 +35,7 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(int id, Date creadoEn, String codigo, String nombre, String categoria, double costo, double iva, double precioVenta, Ventas venta) {
-        this.id = id;
+    public Producto(Date creadoEn, String codigo, String nombre, String categoria, double costo, double iva, double precioVenta, Ventas venta) {
         this.creadoEn = creadoEn;
         this.codigo = codigo;
         this.nombre = nombre;
