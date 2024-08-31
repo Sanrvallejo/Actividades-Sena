@@ -158,7 +158,7 @@
                         <h1 class="h3 mb-0 text-gray-800">Productos</h1>
                     </div>
                     
-                    <form class="user mb-10 w-50">
+                    <form class="user mb-10 w-50" action="ProductoServlet" method="post">
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user" id="codigoProducto"
@@ -192,9 +192,9 @@
                             </div>
                         </div>
                         <div class="form-group row"> 
-                            <a href="#" class="btn btn-primary btn-user btn-block"  >
+                            <button class="btn btn-primary btn-user btn-block" type="submit" >
                                 Registrar producto
-                            </a>
+                            </button>
                             <a " href="#" class="btn btn-google btn-user btn-block" >
                                 Cancelar
                             </a>
