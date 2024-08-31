@@ -158,7 +158,7 @@
                         <h1 class="h3 mb-0 text-gray-800">Productos</h1>
                     </div>
                     
-                    <form class="user" style="width: 50%; margin-bottom: 10px">
+                    <form class="user mb-10 w-50">
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user" id="codigoProducto"
@@ -173,26 +173,32 @@
                         
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="number" class="form-control form-control-user"
+                                <input type="text" class="form-control form-control-user"
                                     id="costoProducto" placeholder="Costo del producto">
                             </div>
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="number" class="form-control form-control-user"
+                                <input type="text" class="form-control form-control-user"
                                     id="iva" placeholder="Iva">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="number" class="form-control form-control-user"
+                                <input type="text" class="form-control form-control-user"
                                     id="precioVenta" placeholder="Precio de venta">
                             </div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user"
+                                    id="categoria" placeholder="Categoría">
+                            </div>
                         </div>
-                        <a href="#" class="btn btn-primary btn-user btn-block" style="width: 35%" >
-                            Registrar producto
-                        </a>
-                        <a " href="#" class="btn btn-google btn-user btn-block" style="width: 35%" >
-                            Cancelar
-                        </a>
+                        <div class="form-group row"> 
+                            <a href="#" class="btn btn-primary btn-user btn-block"  >
+                                Registrar producto
+                            </a>
+                            <a " href="#" class="btn btn-google btn-user btn-block" >
+                                Cancelar
+                            </a>
+                        </div>
 
                     </form>
 
