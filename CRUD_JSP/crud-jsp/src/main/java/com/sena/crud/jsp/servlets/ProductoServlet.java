@@ -1,14 +1,17 @@
 package com.sena.crud.jsp.servlets;
 
 import com.sena.crud.jsp.logica.Controlador;
+import com.sena.crud.jsp.logica.Producto;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ProductoServlet", urlPatterns = {"/ProductoServlet"})
 public class ProductoServlet extends HttpServlet {
@@ -25,7 +28,18 @@ public class ProductoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        List<Producto> listaProductos = new ArrayList<Producto>();
+        
+        listaProductos = control.getProductos();
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("listaProductos", listaProductos);
+        
+        System.out.println(listaProductos.get(0));
+        
+        //response.sendRedirect("verProductos.jsp");
+        
+        response.sendRedirect("verProductos.jsp");
     }
 
 

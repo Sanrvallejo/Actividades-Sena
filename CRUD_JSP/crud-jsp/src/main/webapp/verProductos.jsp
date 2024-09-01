@@ -124,27 +124,6 @@
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
                         </li>
 
                     </ul>
@@ -160,49 +139,47 @@
                         <h1 class="h3 mb-0 text-gray-800">Productos</h1>
                     </div>
                     
-                    <form class="user mb-10 w-50" action="ProductoServlet" method="post">
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="codigoProducto"
-                                    name="codigoProducto" placeholder="Código del producto">
-                            </div>                            
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="nombreProducto"
-                                   name="nombreProducto" placeholder="Nombre del producto">
-                        </div>
-                        
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user"
-                                       name="costoProducto" id="costoProducto" placeholder="Costo del producto">
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user"
-                                       id="iva" name="iva" placeholder="Iva">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user"
-                                       id="precioVenta" name="precioVenta" placeholder="Precio de venta">
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user"
-                                       id="categoria" name="categoria" placeholder="Categoría">
-                            </div>
-                        </div>
-                        <div class="form-group row"> 
-                            <button class="btn btn-primary btn-user btn-block" type="submit" >
-                                Registrar producto
-                            </button>
-                            <a " href="#" class="btn btn-google btn-user btn-block" >
-                                Cancelar
-                            </a>
-                        </div>
+                    <h1 class="h3 mb-2 text-gray-800">Tabla de productos</h1>
+                    <p class="mb-4">Lista de productos existentes en el inventario</p>
 
-                    </form>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Inventario</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nombre</th>
+                                            <th>Categoría</th>
+                                            <th>Costo</th>
+                                            <th>Iva</th>
+                                            <th>Precio</th>
+                                        </tr>
+                                    </thead>
+                                    <%
+                                        List<Producto> listaProductos = (List)request.getSession().getAttribute("listaProductos"); 
+                                    %>
+                                    <tbody>
+                                        <% for(Producto p : listaProductos) {%>
+                                        <tr>
+                                            <td><%=p.getCodigo()%></td>
+                                            <td><%=p.getNombre()%></td>
+                                            <td><%=p.getCategoria()%></td>
+                                            <td><%=p.getCosto()%></td>
+                                            <td><%=p.getIva()%></td>
+                                            <td><%=p.getPrecioVenta()%></td>
+                                        </tr>
+                                       <%}%>
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -269,3 +246,4 @@
 </body>
 
 </html>
+

@@ -2,6 +2,7 @@ package com.sena.crud.jsp.logica;
 
 import com.sena.crud.jsp.persistencia.ControladorPeristencia;
 import java.util.Date;
+import java.util.List;
 
 public class Controlador {
     ControladorPeristencia controlPersis = new ControladorPeristencia();
@@ -19,5 +20,9 @@ public class Controlador {
         producto.setCreadoEn(creadoEn);
         
         controlPersis.crearUsuario(producto);
+    }
+
+    public List<Producto> getProductos() {
+        return controlPersis.getProductos();
     }
 }
