@@ -29,13 +29,14 @@ public class Producto implements Serializable {
     private double iva;
     private double precioVenta;
     
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Ventas venta;
 
     public Producto() {
     }
 
-    public Producto(Date creadoEn, String codigo, String nombre, String categoria, double costo, double iva, double precioVenta, Ventas venta) {
+    public Producto(Date creadoEn, String codigo, String nombre, String categoria, 
+            double costo, double iva, double precioVenta, Ventas venta) {
         this.creadoEn = creadoEn;
         this.codigo = codigo;
         this.nombre = nombre;

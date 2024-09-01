@@ -33,7 +33,7 @@ public class VentasJpaController implements Serializable {
     }
     
     public VentasJpaController() {
-        emf = Persistence.createEntityManagerFactory("CrudJsp_PU");
+        this.emf = Persistence.createEntityManagerFactory("CrudJsp_PU");
     }
 
     public void create(Ventas ventas) {

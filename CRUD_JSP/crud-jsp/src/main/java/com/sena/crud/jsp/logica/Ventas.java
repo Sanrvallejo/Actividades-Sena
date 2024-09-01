@@ -3,8 +3,9 @@ package com.sena.crud.jsp.logica;
 //entidad ventas en bd
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,24 +23,13 @@ public class Ventas implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date creadoEn;
     
-    
     private double subtotal;
     private double iva;
     private double total;
 
     @OneToMany(mappedBy = "venta")
-    private Map<Producto, Double> productos; //se usa map para tener la posibilidad de gestionar cantidades en la misma lista o conjunto
-    
+    private List<Producto> productos = new ArrayList<>();
     public Ventas() {
-    }
-
-    public Ventas(int id, Date creadoEn, Map<Producto, Double> productos, double subtotal, double iva, double total) {
-        this.id = id;
-        this.creadoEn = creadoEn;
-        this.productos = productos;
-        this.subtotal = subtotal;
-        this.iva = iva;
-        this.total = total;
     }
 
     public int getId() {
@@ -58,13 +48,14 @@ public class Ventas implements Serializable {
         this.creadoEn = creadoEn;
     }
 
-    public Map<Producto, Double> getProductos() {
+    public List<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(Map<Producto, Double> productos) {
+    public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
+
 
     public double getSubtotal() {
         return subtotal;
@@ -96,13 +87,15 @@ public class Ventas implements Serializable {
         sb.append("Ventas{");
         sb.append("id=").append(id);
         sb.append(", creadoEn=").append(creadoEn);
-        sb.append(", productos=").append(productos);
         sb.append(", subtotal=").append(subtotal);
         sb.append(", iva=").append(iva);
         sb.append(", total=").append(total);
+        sb.append(", productos=").append(productos);
         sb.append('}');
         return sb.toString();
     }
+
+    
     
     
     

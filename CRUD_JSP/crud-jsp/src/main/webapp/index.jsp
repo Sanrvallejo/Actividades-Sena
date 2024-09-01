@@ -162,33 +162,33 @@
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user" id="codigoProducto"
-                                    placeholder="Código del producto">
+                                    name="codigoProducto" placeholder="Código del producto">
                             </div>                            
                         </div>
                         
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user" id="nombreProducto"
-                                placeholder="Nombre del producto">
+                                   name="nombreProducto" placeholder="Nombre del producto">
                         </div>
                         
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user"
-                                    id="costoProducto" placeholder="Costo del producto">
+                                       name="costoProducto" id="costoProducto" placeholder="Costo del producto">
                             </div>
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user"
-                                    id="iva" placeholder="Iva">
+                                       id="iva" name="iva" placeholder="Iva">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user"
-                                    id="precioVenta" placeholder="Precio de venta">
+                                       id="precioVenta" name="precioVenta" placeholder="Precio de venta">
                             </div>
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user"
-                                    id="categoria" placeholder="Categoría">
+                                       id="categoria" name="categoria" placeholder="Categoría">
                             </div>
                         </div>
                         <div class="form-group row"> 
