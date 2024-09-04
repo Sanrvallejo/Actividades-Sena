@@ -35,10 +35,6 @@ public class ProductoServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("listaProductos", listaProductos);
         
-        System.out.println(listaProductos.get(0));
-        
-        //response.sendRedirect("verProductos.jsp");
-        
         response.sendRedirect("verProductos.jsp");
     }
 
