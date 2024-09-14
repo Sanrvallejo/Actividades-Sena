@@ -2,7 +2,36 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-body">
-        <h1>Formulario</h1>
+        <form #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
+          <div class="form-group">
+            <input type="text" class="form-control" name="name" placeholder="Enter your name"
+            [(ngModel)]="employeeService.selectedEmployee.name">
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-control" name="position" placeholder="Enter your position"
+              [(ngModel)]="employeeService.selectedEmployee.position">
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-control" name="office" placeholder="Enter your office"
+            [(ngModel)]="employeeService.selectedEmployee.office">
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-control" name="salary" placeholder="Enter your salary"
+            [(ngModel)]="employeeService.selectedEmployee.salary">
+          </div>
+
+          <div class="pt-3">
+            <button class="btn btn-primary" style="margin-right: 10px;">
+              Save
+            </button>
+            <button class="btn btn-secondary">
+              Clean
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -17,7 +46,12 @@
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let employee of employeeService.employees">
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.office }}</td>
+          <td>{{ employee.salary }}</td>
+        </tr>
       </tbody>
     </table>
   </div>
